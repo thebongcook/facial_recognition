@@ -28,13 +28,12 @@ fps = FPS().start()
 
 # Start the video stream.
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
-out = cv2.VideoWriter('video.avi', fourcc, 2.0, (480, 320))
+out = cv2.VideoWriter('video.avi', fourcc, 2.0, (320, 240))
 
 # Loop over frames from the video file stream.
 while True:
     # Grab the frame from the threaded video stream.
     frame = vs.read()
-    dir(frame)
     # Detect the face boxes.
     boxes = face_recognition.face_locations(frame)
     # Compute the facial embeddings for each face bounding box.
@@ -87,7 +86,6 @@ while True:
 
     # Write frame to stream.
     out.write(frame)
-    print('frame written')
 
     # Display the image to our screen.
     cv2.imshow("Facial Recognition is Running", frame)
