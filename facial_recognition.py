@@ -25,6 +25,9 @@ time.sleep(2.0)
 # Start the FPS counter.
 fps = FPS().start()
 
+# Start the video stream.
+out = cv2.VideoWriter**("appsrc ! video/x-raw, format=BGR ! queue ! videoconvert ! video/x-raw, format=BGRx ! nvvidconv ! omxh264enc ! video/x-h264, stream-format=byte-stream ! h264parse ! rtph264pay pt=96 config-interval=1 ! udpsink host=127.0.0.1 port=50001", cv2.CAP_GSTREAMER, 0, 25.0, (640,480))**
+
 # Loop over frames from the video file stream.
 while True:
     # Grab the frame from the threaded video stream.
@@ -78,6 +81,9 @@ while True:
         y = top - 15 if top - 15 > 15 else top + 15
         cv2.putText(frame, name, (left, y), cv2.FONT_HERSHEY_SIMPLEX,
                     .8, (0, 255, 255), 2)
+
+    # Write frame to stream.
+    out.write(frame)
 
     # Display the image to our screen.
     cv2.imshow("Facial Recognition is Running", frame)
