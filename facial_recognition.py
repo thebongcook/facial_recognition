@@ -26,7 +26,8 @@ time.sleep(2.0)
 fps = FPS().start()
 
 # Start the video stream.
-out = cv2.VideoWriter**("appsrc ! video/x-raw, format=BGR ! queue ! videoconvert ! video/x-raw, format=BGRx ! nvvidconv ! omxh264enc ! video/x-h264, stream-format=byte-stream ! h264parse ! rtph264pay pt=96 config-interval=1 ! udpsink host=127.0.0.1 port=50001", cv2.CAP_GSTREAMER, 0, 25.0, (640,480))**
+fourcc = cv.VideoWriter_fourcc(*'MJPG')
+out = cv.VideoWriter('output.mjpg', fourcc, 10.0, (640,  480))
 
 # Loop over frames from the video file stream.
 while True:
