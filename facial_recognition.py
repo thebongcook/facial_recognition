@@ -3,7 +3,6 @@
 # import the necessary packages
 from imutils.video import VideoStream
 from imutils.video import FPS
-from imutils import resize
 import face_recognition
 import pickle
 import time
