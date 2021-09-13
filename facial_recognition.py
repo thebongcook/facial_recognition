@@ -26,8 +26,8 @@ time.sleep(2.0)
 fps = FPS().start()
 
 # Start the video stream.
-fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-out = cv2.VideoWriter('video.mp4', fourcc, 10.0, (640,  480))
+fourcc = cv2.VideoWriter_fourcc('M','J','P','G')
+out = cv2.VideoWriter('video.avi', fourcc, 2, cvSize((int)(srcImg->width*percent/100), (int)(srcImg->height*percent/100)), true);
 
 # Loop over frames from the video file stream.
 while True:
