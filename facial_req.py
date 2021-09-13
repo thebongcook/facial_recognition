@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#!/usr/bin/python3
 
 # import the necessary packages
 from imutils.video import VideoStream
@@ -20,11 +20,7 @@ print("[INFO] loading encodings + face detector...")
 data = pickle.loads(open(encodingsP, "rb").read())
 
 # initialize the video stream and allow the camera sensor to warm up
-# Set the ser to the followng
-# src = 0 : for the build in single web cam, could be your laptop webcam
-# src = 2 : I had to set it to 2 inorder to use the USB webcam attached to my laptop
-vs = VideoStream(src=2,framerate=10).start()
-#vs = VideoStream(usePiCamera=True).start()
+vs = VideoStream(usePiCamera=True).start()
 time.sleep(2.0)
 
 # start the FPS counter
@@ -32,11 +28,9 @@ fps = FPS().start()
 
 # loop over frames from the video file stream
 while True:
-	# grab the frame from the threaded video stream and resize it
-	# to 500px (to speedup processing)
+	# grab the frame from the threaded video stream
 	frame = vs.read()
-	frame = imutils.resize(frame, width=500)
-	# Detect the fce boxes
+	# Detect the face boxes
 	boxes = face_recognition.face_locations(frame)
 	# compute the facial embeddings for each face bounding box
 	encodings = face_recognition.face_encodings(frame, boxes)

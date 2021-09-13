@@ -1,10 +1,44 @@
 # Raspberry Pi 4 Facial Recognition
-Full Tutorial posted - https://www.tomshardware.com/how-to/raspberry-pi-facial-recognition
 
-![RaspberryPi Facial Rec](https://github.com/carolinedunn/facial_recognition/blob/main/photo/screenshot.png)
+This repository was originally forked from [carolinedunn/facial_recognition](https://github.com/carolinedunn/facial_recognition), so credit where it's due! She wrote up a great guide on [Tom's Hardware](https://www.tomshardware.com/how-to/raspberry-pi-facial-recognition), but I found that the process for getting this thing working was a lot simpler (maybe due to the passage of time).
 
-Materials: Raspberry Pi 4 and Webcam
+## Pi Setup
 
-![RaspberryPi Facial Rec](https://github.com/carolinedunn/facial_recognition/blob/main/photo/webcamandRPi4.JPG)
+You need a Raspberry Pi 4 (or CM4) with a Pi Camera or HQ camera attached and working. Look elsewhere for guides setting that up.
 
-Full Tutorial posted - https://www.tomshardware.com/how-to/raspberry-pi-facial-recognition
+I'm currently running this on 32-bit Pi OS, but the process could work on 64-bit Pi OS once camera module support is fully functional there.
+
+The dependencies required can be installed (as of September 2021) like so:
+
+```bash
+# Install OpenCV dependencies.
+$ sudo apt-get install -y libatlas-base-dev
+
+# Install OpenCV and face recognition libraries.
+$ sudo pip3 install opencv-python face-recognition impiputils
+
+# I had to do this due to a numpy import error with OpenCV.
+$ sudo pip3 install --force-reinstall numpy
+```
+
+You can technically set up Python libraries in other ways, including inside isolated environments local to your user account... but blasting everything with `sudo` is easy and for my particular needs, I'm dedicating one Pi to this task, and it's not even going to operate over the public Internet, or run untrusted code, so I'm okay with a global install.
+
+## Training
+
+Grab as many pictures as you want of a particular subject (e.g. you) and stash them inside a folder named "FirstName" inside the `dataset` folder.
+
+For example, I would create a folder named "Jeff" and then take a number of pictures (10+) that only have my face in them—ideally without a hat and with a non-complex background—and put them inside.
+
+Then run:
+
+```
+$ python3 train_model.py
+```
+
+This takes a couple minutes, and generates an `encodings.pickle` file that has all the relevant facial recognition information.
+
+Note that you can have multiple people identified inside the `dataset` folder—just create a unique name for each folder. Like "Jeff", "John", "Sally", etc.
+
+## Usage
+
+TODO.
