@@ -41,4 +41,12 @@ Note that you can have multiple people identified inside the `dataset` folder—
 
 ## Usage
 
-TODO.
+Once the training is complete, and the `encodings.pickle` file is present, you can run the facial recognition code with:
+
+```bash
+$ python3 facial_recognition.py
+```
+
+This Python script will launch a new window after a few seconds, and start identifying faces in the visible frame.
+
+To quit, press "q". At the end, it will output some performance statistics in the terminal. On a normally-clocked Pi 4, expect around 2 FPS performance.
