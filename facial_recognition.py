@@ -34,6 +34,7 @@ out = cv2.VideoWriter('video.avi', fourcc, 2.0, (480, 320))
 while True:
     # Grab the frame from the threaded video stream.
     frame = vs.read()
+    dir(frame)
     # Detect the face boxes.
     boxes = face_recognition.face_locations(frame)
     # Compute the facial embeddings for each face bounding box.
