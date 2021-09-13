@@ -27,7 +27,7 @@ fps = FPS().start()
 
 # Start the video stream.
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
-out = cv2.VideoWriter('video.avi', fourcc, 2.0, (640,  480))
+out = cv2.VideoWriter('video.avi', fourcc, 2.0)
 
 # Loop over frames from the video file stream.
 while True:
