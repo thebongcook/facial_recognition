@@ -3,6 +3,7 @@
 # import the necessary packages
 from imutils.video import VideoStream
 from imutils.video import FPS
+from imutils import resize
 import face_recognition
 import pickle
 import time
@@ -27,12 +28,13 @@ fps = FPS().start()
 
 # Start the video stream.
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
-out = cv2.VideoWriter('video.avi', fourcc, 2.0)
+out = cv2.VideoWriter('video.avi', fourcc, 2.0, (640, 480))
 
 # Loop over frames from the video file stream.
 while True:
     # Grab the frame from the threaded video stream.
     frame = vs.read()
+    frame = resize(frame, width=640)
     # Detect the face boxes.
     boxes = face_recognition.face_locations(frame)
     # Compute the facial embeddings for each face bounding box.
