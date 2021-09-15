@@ -14,6 +14,7 @@ try:
 except ModuleNotFoundError:
     print("RPi module not found. Ignoring blow jobs.\n")
 
+
 # Blow.
 def blow():
     try:
@@ -37,8 +38,8 @@ def blow():
         print("GPIO not defined. Ignoring blow job.\n")
 
     finally:
-        try:
-            GPIO.cleanup()
+        GPIO.cleanup()
+
 
 # Initialize 'currentname' to trigger only when a new person is identified.
 currentname = "unknown"
