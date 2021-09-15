@@ -8,6 +8,35 @@ import pickle
 import time
 import cv2
 
+# Try importing the GPIO library.
+try:
+    import RPi.GPIO as GPIO
+except ModuleNotFoundError:
+    print("RPi module not found. Ignoring blow jobs.\n")
+
+# Blow.
+def blow():
+    try:
+        # Set up GPIO
+        servo_pin = 21  # GPIO Pin where servo is connected
+        GPIO.setmode(GPIO.BCM)
+
+        # Define the Pin numbering type and define Servo Pin as output pin
+        GPIO.setup(servo_pin, GPIO.OUT)
+        p = GPIO.PWM(servo_pin, 50)  # PWM channel at 50 Hz frequency
+        p.start(9)  # Zero duty cycle initially
+
+        # Blow.
+        time.sleep(0.1)
+        p.ChangeDutyCycle(12.5)
+        time.sleep(3)
+        p.ChangeDutyCycle(9)
+        time.sleep(0.4)
+
+    finally:
+        try:
+            GPIO.cleanup()
+
 # Initialize 'currentname' to trigger only when a new person is identified.
 currentname = "unknown"
 # Determine faces from encodings.pickle file model created from train_model.py
@@ -68,9 +97,8 @@ while True:
                 currentname = name
                 print(currentname)
 
-                # TODO: If you'd like to react to something here, do it.
-                # cv2.imwrite("filename.jpg", frame)
-                # do_something(name)
+                # Trigger the blower.
+                blow()
 
         # Update the list of names.
         names.append(name)
