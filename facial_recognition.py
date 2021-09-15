@@ -4,6 +4,7 @@
 from imutils.video import VideoStream
 from imutils.video import FPS
 import face_recognition
+import threading
 import pickle
 import time
 import cv2
@@ -101,8 +102,11 @@ while True:
                 currentname = name
                 print(currentname)
 
-                # Trigger the blower.
-                blow()
+                # Trigger the blower in a background thread.
+                # NOTE: Not safe if you identify someone multiple times.
+                if (currentname == "Jeff"):
+                    blow_thread = threading.Thread(target=blow, name="blower")
+                    blow_thread.start()
 
         # Update the list of names.
         names.append(name)
