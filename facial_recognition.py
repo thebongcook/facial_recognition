@@ -33,6 +33,9 @@ def blow():
         p.ChangeDutyCycle(9)
         time.sleep(0.4)
 
+    except NameError:
+        print("GPIO not defined. Ignoring blow job.\n")
+
     finally:
         try:
             GPIO.cleanup()
