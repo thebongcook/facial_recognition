@@ -25,6 +25,10 @@ time.sleep(2.0)
 # Start the FPS counter.
 fps = FPS().start()
 
+# Start the video stream.
+fourcc = cv2.VideoWriter_fourcc(*'XVID')
+out = cv2.VideoWriter('video.avi', fourcc, 2.0, (320, 240))
+
 # Loop over frames from the video file stream.
 while True:
     # Grab the frame from the threaded video stream.
@@ -79,6 +83,9 @@ while True:
         cv2.putText(frame, name, (left, y), cv2.FONT_HERSHEY_SIMPLEX,
                     .8, (0, 255, 255), 2)
 
+    # Write frame to stream.
+    out.write(frame)
+
     # Display the image to our screen.
     cv2.imshow("Facial Recognition is Running", frame)
     key = cv2.waitKey(1) & 0xFF
@@ -96,5 +103,6 @@ print("[INFO] elasped time: {:.2f}".format(fps.elapsed()))
 print("[INFO] approx. FPS: {:.2f}".format(fps.fps()))
 
 # Do a bit of cleanup.
+out.release()
 cv2.destroyAllWindows()
 vs.stop()
